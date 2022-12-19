@@ -23,7 +23,7 @@ jobs:
       - name: Install test
         run: npm i jest supertest
       - name: Run test
-        run: NODE_OPTIONS=--experimental-vm-modules npx jest --detectOpenHandles
+        run: NODE_OPTIONS=--experimental-vm-modules npx jest --detectOpenHandles --forceExit
 
       - name: Login into Docker Hub
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
