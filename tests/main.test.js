@@ -2,7 +2,7 @@ import request from 'supertest'
 import app from '../index'
 
 describe('Test', () => {
-  test('GET /post', async (done) => {
+  test('GET /post', (done) => {
     request(app)
       .get('/post')
       .expect('Content-Type', /json/)
