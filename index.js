@@ -8,18 +8,19 @@ import { init } from './trace.cjs'
 import Todo from './schemas/Todo.js'
 const { tracer } = init('user-service', 'development')
 
-
 const metricsMiddleware = promBundle({
   includeMethod: true,
   includePath: true,
   includeStatusCode: true,
   includeUp: true,
-  customLabels: { project_name: 'server2', project_type: 'test_metrics_labels' },
+  customLabels: {
+    project_name: 'server2',
+    project_type: 'test_metrics_labels'
+  },
   promClient: {
-    collectDefaultMetrics: {
-    }
+    collectDefaultMetrics: {}
   }
-});
+})
 
 const app = express()
 app.use(express.json())
@@ -59,10 +60,11 @@ app.post('/todo', async (req, res) => {
   activeSpan.end()
 })
 
-
 const start = async () => {
   try {
-    await mongoose.connect('mongodb://root:example@mongo:27017/todo?authSource=admin')
+    await mongoose.connect(
+      'mongodb://root:example@mongo:27017/todo?authSource=admin'
+    )
     app.listen(3001, () => {
       console.log(`Server has been started on port 3001`)
     })
@@ -73,3 +75,4 @@ const start = async () => {
 
 start()
 
+export default app
